@@ -26,9 +26,9 @@ nexjs.org
 
 `npx create-next-app@latest`
 
-### Routers
-
 Pages are rendered on the server
+
+### Routers
 
 #### App Router
 
@@ -36,7 +36,7 @@ Relatively new way - was introduced with v13.
 
 #### Pages Router
 
-Older, sable way on how we can do the routing.
+Older, more stable way on how we can do the routing.
 
 `npm run dev`
 
@@ -51,6 +51,57 @@ https://github.com/academind/react-complete-guide-course-resources/tree/main/cod
 React is a javascript library to build user interfaces.
 We are going to write javascript code to create highly interactive user interfaces.
 
-imperitive (jQuery) vs declerative code (React)
+Imperative (jQuery, default javascript way) vs declarative code (React).
 
-Codewhisperer?
+_Declarative programming_ is a paradigm that focuses on what the program should
+achieve, without explicitly stating how to achieve it. It is a high-level concept
+that abstracts the intricacies of the underlying system.
+
+_Imperative programming_ is a paradigm where you explicitly state how the program
+should achieve the desired result. You write step-by-step instructions for the
+computer to follow.
+
+Codewhisperer --> AI code generator, I don't think that I am going to need that
+for this course :)
+
+_Create React App_
+or Vite
+
+`npx create-react-app`
+
+JSX files
+
+src/main.js
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+```
+
+React.ScriptMode - warnings regarding to sub-optimal code usage.
+https://react.dev/reference/react/StrictMode
+
+Typically functions that return JSX are called components.
+
+Any website that you can think of is built up by building blocks - components.
+
+> We will build a Twitter like demo app!
+
+React components are just functions, but the name of the function MUST be upper-
+case. Elements that start with lower case chars are treated by React as default
+html tags.
+
+`<h1>{4+4}</h1>` whatever is in the curly braces is calculated by the JS engine
+
+`rafce` --> React Functional Component skeleton ins VSCode.
+
+An element must return with a highest level tag / component.
+You can use self closing tags, like `<Post />`
+
+JS `Array.prototype.map()` callback function can have 3 arguments:
+
+- element
+- index
+- array
+
+Props enable us to pass arguments to our components.
