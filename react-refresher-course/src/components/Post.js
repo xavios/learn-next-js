@@ -1,12 +1,12 @@
 import React from "react";
+import classes from "./Post.module.css";
 
 const Post = ({ name, greeting }) => {
   return (
-    <section>
-      <p>
-        <strong>{name}</strong> greets you: "{greeting}"
-      </p>
-    </section>
+    <li className={classes.post}>
+      <p className={classes.author}>{name}</p>
+      <p className={classes.text}>{greeting}</p>
+    </li>
   );
 };
 

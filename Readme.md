@@ -98,10 +98,36 @@ html tags.
 An element must return with a highest level tag / component.
 You can use self closing tags, like `<Post />`
 
-JS `Array.prototype.map()` callback function can have 3 arguments:
+JS `Array.prototype.map(callbackFn)` callbackFn function can have 3 arguments:
 
 - element
 - index
 - array
 
 Props enable us to pass arguments to our components.
+
+`className` can be added to the components, but this can have css class name
+clashes.
+
+Use `Post.module.css` to use css modules.
+`import classes from "./Post.module.css";` and then `className={classes.post}`
+
+This ensures unique class names throughout the whole application.
+
+`Array.prototype.sort(compareFn)`
+Compare function should return a number where:
+
+- A negative value indicates that a should come before b.
+- A positive value indicates that a should come after b.
+- Zero or NaN indicates that a and b are considered equal.
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
+_CSS grid_ is used in the CSS, so I think further down I should learn it.
+Common js vs Es module?
+
+#### State
+
+`const [state, setState] = useState(defaultValue)`
+And then the stateful value and the setState fn can be prop drilled down to
+other components and we can traverse the data through the component hierarchy.
