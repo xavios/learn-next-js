@@ -1,8 +1,9 @@
-import { useState } from "react";
-import "./App.css";
-import NewPost from "./components/NewPost";
 import "./components/Post";
 import PostsList from "./components/PostsList";
+import MainHeader from "./components/MainHeader";
+import { useState } from "react";
+import NewPost from "./components/NewPost";
+import Modal from "./components/Modal";
 
 const defaultNamesAndGreetings = [
   { name: "Dorka", greeting: "Give me a high-five you donkey!" },
@@ -19,34 +20,39 @@ function randomInteger(min, max) {
 }
 
 function App() {
+  const [modalIsVisible, setModalVisibility] = useState(false);
   const [namesAndGreetings, setNamesAndGreetings] = useState(
     defaultNamesAndGreetings
+      .slice(0, randomInteger(1, defaultNamesAndGreetings.length - 1))
+      .sort((a, b) => {
+        return Math.random() > 0.5 ? 1 : -1;
+      })
   );
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello World!</h1>
-        <main>
-          <PostsList
-            posts={namesAndGreetings
-              .slice(0, randomInteger(1, defaultNamesAndGreetings.length - 1))
-              .sort((a, b) => {
-                if (a.name === namesAndGreetings[0].name) {
-                  return -1;
-                }
-                return Math.random() > 0.5 ? 1 : -1;
-              })}
-          />
-
-          <NewPost
-            setNamesAndGreetings={setNamesAndGreetings}
-            namesAndGreetings={namesAndGreetings}
-          />
-          <p>React JS is awesome!</p>
-        </main>
-      </header>
-    </div>
+    <>
+      <MainHeader
+        onCreatePost={() => {
+          setModalVisibility(true);
+        }}
+      />
+      <main>
+        {modalIsVisible && (
+          <Modal
+            showModal={modalIsVisible}
+            closeModal={() => {
+              setModalVisibility(false);
+            }}
+          >
+            <NewPost
+              setNamesAndGreetings={setNamesAndGreetings}
+              namesAndGreetings={namesAndGreetings}
+            />
+          </Modal>
+        )}
+        <PostsList posts={namesAndGreetings} modalIsVisible={modalIsVisible} />
+      </main>
+    </>
   );
 }
 

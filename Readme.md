@@ -123,11 +123,32 @@ Compare function should return a number where:
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 
-_CSS grid_ is used in the CSS, so I think further down I should learn it.
-Common js vs Es module?
-
 #### State
 
 `const [state, setState] = useState(defaultValue)`
 And then the stateful value and the setState fn can be prop drilled down to
 other components and we can traverse the data through the component hierarchy.
+
+If a website is dynamic, then it can have different states. React can manage the
+states of the website. It can register a changing state and can create a function
+to set a new state for the changing part. If the setState is called, a rerender
+happens.
+
+In JS functions are totally normal values (objects), thus they can be passed
+around.
+
+React hook --> must execute in React component functions.
+Array destructuring.
+
+##### Lifting the state up
+
+State in component A, but event that would update the state
+in component B - then you need to find their shared first parent and lift the
+state up there and props drill down the setState function to component B and the
+state to component A.
+
+## Things to check on
+
+- _CSS grid_ is used in the CSS, so I think further down I should learn it.
+- Common js vs Es module?
+- HTML5 dialog tag
