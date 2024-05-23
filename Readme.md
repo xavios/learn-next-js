@@ -147,6 +147,14 @@ in component B - then you need to find their shared first parent and lift the
 state up there and props drill down the setState function to component B and the
 state to component A.
 
+---
+
+**2024.05.23.**
+
+To get back to the topic, I have implemented another modal window and some new
+state handling for setting the star ratings for the individual posts. I lifted
+the state to the App component.
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.

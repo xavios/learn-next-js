@@ -4,15 +4,16 @@ import MainHeader from "./components/MainHeader";
 import { useState } from "react";
 import NewPost from "./components/NewPost";
 import Modal from "./components/Modal";
+import StarRating from "./components/StarRating";
 
 const defaultNamesAndGreetings = [
-  { name: "Dorka", greeting: "Give me a high-five you donkey!" },
-  { name: "Anna", greeting: "Daddychino!" },
-  { name: "Andris", greeting: "What is up?" },
-  { name: "Szimi", greeting: "Kuuckiii" },
-  { name: "Tigi", greeting: "Woof woof!" },
-  { name: "Jázmota", greeting: "*flees away**" },
-  { name: "Cilike", greeting: "Mauw!" },
+  { name: "Dorka", greeting: "Give me a high-five you donkey!", rating: 2 },
+  { name: "Anna", greeting: "Daddychino!", rating: 4 },
+  { name: "Andris", greeting: "What is up?", rating: 3 },
+  { name: "Szimi", greeting: "Kuuckiii", rating: 5 },
+  { name: "Tigi", greeting: "Woof woof!", rating: 2 },
+  { name: "Jázmota", greeting: "*flees away**", rating: 3 },
+  { name: "Cilike", greeting: "Mauw!", rating: 1 },
 ];
 
 function randomInteger(min, max) {
@@ -20,7 +21,7 @@ function randomInteger(min, max) {
 }
 
 function App() {
-  const [modalIsVisible, setModalVisibility] = useState(false);
+  const [newPostModalIsVisible, setNewPostModalIsVisible] = useState(false);
   const [namesAndGreetings, setNamesAndGreetings] = useState(
     defaultNamesAndGreetings
       .slice(0, randomInteger(1, defaultNamesAndGreetings.length - 1))
@@ -29,19 +30,20 @@ function App() {
       })
   );
 
+  const [starModalVisible, setStarModalVisible] = useState(false);
+  const [starRatingEditIndex, setStarRatingEditIndex] = useState(null);
   return (
     <>
       <MainHeader
         onCreatePost={() => {
-          setModalVisibility(true);
+          setNewPostModalIsVisible(true);
         }}
       />
       <main>
-        {modalIsVisible && (
+        {newPostModalIsVisible && (
           <Modal
-            showModal={modalIsVisible}
             closeModal={() => {
-              setModalVisibility(false);
+              setNewPostModalIsVisible(false);
             }}
           >
             <NewPost
@@ -50,7 +52,31 @@ function App() {
             />
           </Modal>
         )}
-        <PostsList posts={namesAndGreetings} modalIsVisible={modalIsVisible} />
+        {starModalVisible && (
+          <Modal
+            closeModal={() => {
+              setStarModalVisible(false);
+            }}
+          >
+            <StarRating
+              rating={namesAndGreetings[starRatingEditIndex].rating}
+              setRating={(rating) => {
+                let newNamesAndGreetings = [...namesAndGreetings];
+                newNamesAndGreetings[starRatingEditIndex].rating = rating;
+                setNamesAndGreetings(newNamesAndGreetings);
+              }}
+            />
+          </Modal>
+        )}
+
+        <PostsList
+          posts={namesAndGreetings}
+          modalIsVisible={newPostModalIsVisible}
+          onStarClick={(index) => {
+            setStarRatingEditIndex(index);
+            setStarModalVisible(true);
+          }}
+        />
       </main>
     </>
   );
