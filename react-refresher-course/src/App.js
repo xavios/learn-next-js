@@ -47,8 +47,15 @@ function App() {
             }}
           >
             <NewPost
-              setNamesAndGreetings={setNamesAndGreetings}
+              setNamesAndGreetings={(namesAndGreetings) => {
+                setNamesAndGreetings(namesAndGreetings);
+                setNewPostModalIsVisible(false);
+              }}
               namesAndGreetings={namesAndGreetings}
+              cancel={() => {
+                setNewPostModalIsVisible(false);
+              }}
+              randomRating={randomInteger(1, 5)}
             />
           </Modal>
         )}
@@ -61,9 +68,11 @@ function App() {
             <StarRating
               rating={namesAndGreetings[starRatingEditIndex].rating}
               setRating={(rating) => {
-                let newNamesAndGreetings = [...namesAndGreetings];
-                newNamesAndGreetings[starRatingEditIndex].rating = rating;
-                setNamesAndGreetings(newNamesAndGreetings);
+                setNamesAndGreetings((previous) => {
+                  const copy = [...previous];
+                  copy[starRatingEditIndex].rating = rating;
+                  return copy;
+                });
               }}
             />
           </Modal>
@@ -71,7 +80,6 @@ function App() {
 
         <PostsList
           posts={namesAndGreetings}
-          modalIsVisible={newPostModalIsVisible}
           onStarClick={(index) => {
             setStarRatingEditIndex(index);
             setStarModalVisible(true);

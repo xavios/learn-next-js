@@ -155,6 +155,16 @@ To get back to the topic, I have implemented another modal window and some new
 state handling for setting the star ratings for the individual posts. I lifted
 the state to the App component.
 
+If the new state depends on the old state, you need to use the function callback
+trick, so that the order of the state updates will be correct. React does not
+instantly updates the states, but schedules the work for later on. With this trick
+we guarantee, that the states will be updated in the correct order.
+
+```js
+const [state, setState] = useState([1, 2, 3]);
+setState((previous) => [...previous, 4]);
+```
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.

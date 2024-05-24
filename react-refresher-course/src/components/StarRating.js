@@ -14,6 +14,8 @@ const StarRating = ({ rating, setRating }) => {
             onChange={(e) => {
               setRating(e.target.value);
             }}
+            min="1"
+            max="5"
           ></input>
         </p>
       </form>
