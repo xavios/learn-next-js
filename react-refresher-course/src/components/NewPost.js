@@ -3,14 +3,19 @@ import classes from "./NewPost.module.css";
 const NewPost = (props) => {
   function onSubmit(e) {
     e.preventDefault();
-    props.setNamesAndGreetings((previous) => [
-      {
-        name: e.target.name.value,
-        greeting: e.target.body.value,
-        rating: props.randomRating,
+    const newPost = {
+      name: e.target.name.value,
+      greeting: e.target.body.value,
+      rating: props.randomRating,
+    };
+    props.setNamesAndGreetings((previous) => [newPost, ...previous]);
+    fetch("http://localhost:8080/posts", {
+      method: "POST",
+      body: JSON.stringify(newPost),
+      headers: {
+        "Content-Type": "application/json",
       },
-      ...previous,
-    ]);
+    });
   }
 
   return (

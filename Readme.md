@@ -165,6 +165,37 @@ const [state, setState] = useState([1, 2, 3]);
 setState((previous) => [...previous, 4]);
 ```
 
+### useEffect
+
+React components are just functions. They should be pure functions: no side effects.
+Pure function: for an input produce a reliable output. Ie.: receive props, return
+predictable jsx components.
+
+Manipulating side effects should be separated from rendering, in order to make sure
+that the side effect does not get in the way of the rendering. If we need to perform
+a side effect we would need to do that **after** the rendering.
+
+In short, useEffect is a tool that lets us interact with the outside world but
+not affect the rendering or performance of the component that it's in.
+
+```js
+import { useEffect } from "react";
+
+function MyComponent() {
+  useEffect(() => {}, []);
+}
+```
+
+useEffect has a callback function and a dependencies array. If the deps array is
+not given it will run the callback on each re-render.
+
+```js
+/* in dummy-backend folder */
+npm start
+/* in react-refresher-course folder */
+npm start
+```
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
