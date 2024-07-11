@@ -1,13 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import Posts from "./routes/Posts";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Layout from "./routes/Layout";
+import NewPost from "./routes/NewPost";
+import StarRating from "./routes/StarRating";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const router = createBrowserRouter([{ path: "/", element: <App /> }]);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Posts />,
+        children: [
+          { path: "create-post", element: <NewPost /> },
+          { path: "star-rating", element: <StarRating /> },
+        ],
+      },
+    ],
+  },
+]);
 
 root.render(
   <React.StrictMode>

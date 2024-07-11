@@ -1,10 +1,13 @@
 import React from "react";
 import classes from "./Modal.module.css";
+import { Link } from "react-router-dom";
 
-const Modal = ({ children, closeModal }) => {
+const Modal = ({ children }) => {
   return (
     <>
-      <div className={classes.backdrop} onClick={closeModal} />
+      <Link to="/">
+        <div className={classes.backdrop} />
+      </Link>
       <dialog className={classes.modal} open={true}>
         {children}
       </dialog>

@@ -1,9 +1,10 @@
 import React from "react";
 import classes from "./NewPost.module.css";
+import Modal from "../components/Modal";
 
 const StarRating = ({ rating, setRating }) => {
   return (
-    <>
+    <Modal>
       <form className={classes.form}>
         <label htmlFor="rating">Set a rating!</label>
         <p>
@@ -19,7 +20,7 @@ const StarRating = ({ rating, setRating }) => {
           ></input>
         </p>
       </form>
-    </>
+    </Modal>
   );
 };
 

@@ -196,8 +196,48 @@ npm start
 npm start
 ```
 
+### Routing
+
+Layout routes: other routes are embedded into it.
+We need to use the `<Outlet />` component to load the child route components.
+
+Example for routing:
+
+`index.js`
+
+```js
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import New from "./routes/New";
+import App from "./routes/App";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/new",
+        element: <New />,
+      },
+    ],
+  },
+]);
+```
+
+We can use the `<Link />` component to enable react routing based Linking between
+routes - that way we will get an SPA navigation from site to site.
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
 - Common js vs Es module?
 - HTML5 dialog tag
+
+TODO:
+
+- useNavigate in the Modal component
+- use relative paths --> ".."
+- make sure that there is a proper npm command to concurrently run the BE and
+  the FE apps.
+- parameterized route for editing the stars
+- put into containers and docker-compose the whole stuff
