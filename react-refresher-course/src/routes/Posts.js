@@ -1,33 +1,44 @@
 import "../components/Post";
 import PostsList from "../components/PostsList";
-import { Outlet, useLoaderData, useNavigation } from "react-router-dom";
+import { Outlet, useLoaderData, defer, Await } from "react-router-dom";
+import React from "react";
 
 function randomInteger(min, max) {
   return min + Math.floor(Math.random() * (max - min + 1));
 }
 
-function Posts() {
-  const namesAndGreetings = useLoaderData();
-  const navigation = useNavigation();
+export default function Posts() {
+  const data = useLoaderData();
 
-  debugger;
+  // This is how to have a "loading" state with react-router-dom.
+  // use defer, React.Suspense, Await and then it will work just fine.
   return (
     <>
       <Outlet />
       <main>
-        <PostsList
-          posts={namesAndGreetings}
-          isFetching={navigation.state === "loading"}
-        />
+        <React.Suspense
+          fallback={
+            <div>
+              <h1>Loading...</h1>
+            </div>
+          }
+        >
+          <Await
+            resolve={data.namesAndGreetings}
+            errorElement={<p>Error loading package location!</p>}
+          >
+            {(namesAndGreetings) => {
+              return <PostsList posts={namesAndGreetings} />;
+            }}
+          </Await>
+        </React.Suspense>
       </main>
     </>
   );
 }
 
-export default Posts;
-
 export async function loader() {
-  return fetch("http://localhost:8080/posts")
+  const namesAndGreetings = fetch("http://localhost:8080/posts")
     .then((fetchResult) => {
       return fetchResult.json();
     })
@@ -38,4 +49,5 @@ export async function loader() {
           return Math.random() > 0.5 ? 1 : -1;
         })
     );
+  return defer({ namesAndGreetings: namesAndGreetings });
 }

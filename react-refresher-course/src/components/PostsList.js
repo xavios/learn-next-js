@@ -5,19 +5,13 @@ import classes from "./PostsList.module.css";
 const PostsList = ({ posts, fetching }) => {
   return (
     <ul className={classes.posts}>
-      {fetching && (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      )}
-      {!fetching && posts.length === 0 && (
+      {posts.length === 0 && (
         <div>
           <h1>There are no posts yet!</h1>
           <p>Look back later 😊!</p>
         </div>
       )}
-      {!fetching &&
-        posts.length > 1 &&
+      {posts.length > 1 &&
         posts.map((post, idx) => {
           const { name, greeting, rating } = post;
           return (

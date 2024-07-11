@@ -243,7 +243,7 @@ TODO:
   the FE apps.
 - parameterized route for editing the stars
 - put into containers and docker-compose the whole stuff
-- make sure to have loading state with the react router loader --> break up the
-  Posts component and create a subRouter and use setState()
+
 - use an action to post the data
-- log down what you have learned about react-router-dom loaders.
+- log down what you have learned about react-router-dom loaders and defer, Await,
+  React.Suspense
