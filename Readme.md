@@ -227,6 +227,10 @@ const router = createBrowserRouter([
 We can use the `<Link />` component to enable react routing based Linking between
 routes - that way we will get an SPA navigation from site to site.
 
+`useNavigate()` hook can be reached from 'react-router-dom' and can be used to
+programmatically navigate between routes. The created `navigate()` function should
+be called from a `useEffect()`.
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
@@ -235,9 +239,11 @@ routes - that way we will get an SPA navigation from site to site.
 
 TODO:
 
-- useNavigate in the Modal component
-- use relative paths --> ".."
 - make sure that there is a proper npm command to concurrently run the BE and
   the FE apps.
 - parameterized route for editing the stars
 - put into containers and docker-compose the whole stuff
+- make sure to have loading state with the react router loader --> break up the
+  Posts component and create a subRouter and use setState()
+- use an action to post the data
+- log down what you have learned about react-router-dom loaders.
