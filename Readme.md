@@ -189,12 +189,10 @@ function MyComponent() {
 useEffect has a callback function and a dependencies array. If the deps array is
 not given it will run the callback on each re-render.
 
-```js
-/* in dummy-backend folder */
-npm start
-/* in react-refresher-course folder */
-npm start
-```
+## How to run the React Refresher Course?
+
+`npm i && npm start`
+With the magic of concurrently this should do the trick :)
 
 ### Routing
 
@@ -236,11 +234,11 @@ be called from a `useEffect()`.
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
 - Common js vs Es module?
 - HTML5 dialog tag
+- Typescript must be done
+- how does chat gpt work?
 
 TODO:
 
-- make sure that there is a proper npm command to concurrently run the BE and
-  the FE apps.
 - parameterized route for editing the stars
 - put into containers and docker-compose the whole stuff
 

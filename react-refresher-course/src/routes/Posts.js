@@ -18,7 +18,7 @@ export default function Posts() {
       <main>
         <React.Suspense
           fallback={
-            <div>
+            <div style={{ margin: "auto", width: "200px" }}>
               <h1>Loading...</h1>
             </div>
           }
