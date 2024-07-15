@@ -40,7 +40,6 @@ export async function loader() {
       return fetchResult.json();
     })
     .then((result) => {
-      console.log(JSON.stringify(result));
       return result.posts
         .slice(0, randomInteger(1, result.posts.length - 1))
         .sort((a, b) => {

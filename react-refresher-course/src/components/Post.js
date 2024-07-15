@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Post.module.css";
 import { Link } from "react-router-dom";
 
-const Post = ({ name, greeting, rating }) => {
+const Post = ({ name, greeting, rating, id }) => {
   const starRating = (rating) => {
     let stars = "";
     for (let i = 0; i < rating; i++) {
@@ -16,7 +16,7 @@ const Post = ({ name, greeting, rating }) => {
       <p className={classes.author}>{name}</p>
       <p className={classes.text}>{greeting}</p>
       <p>
-        <Link to="star-rating" className={classes.starRating}>
+        <Link to={`star-rating/${id}`} className={classes.starRating}>
           {starRating(rating)}
         </Link>
       </p>

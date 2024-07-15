@@ -28,9 +28,24 @@ app.get("/posts/:id", async (req, res) => {
   res.json({ post });
 });
 
+app.post("/posts/:id", async (req, res) => {
+  let allPosts = await getStoredPosts();
+  let selectedPostIdx = NaN;
+  const post = allPosts.find((post, idx) => {
+    if (post.id === req.params.id) {
+      selectedPostIdx = idx;
+      return true;
+    }
+    return false;
+  });
+  allPosts[selectedPostIdx].rating = req.body.rating;
+  await storePosts(allPosts);
+  res.status(200).json('{"status": "ok"}');
+});
+
 app.post("/new-post", async (req, res) => {
   const existingPosts = await getStoredPosts();
-  console.log(JSON.stringify(req.body));
+  console.log("Posted:", JSON.stringify(req.body));
   const postData = req.body;
   const newPost = {
     ...postData,

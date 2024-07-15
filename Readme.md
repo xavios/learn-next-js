@@ -279,5 +279,4 @@ into an object (Map --> object).
 
 TODO:
 
-- parameterized route for editing the stars
 - put into containers and docker-compose the whole stuff

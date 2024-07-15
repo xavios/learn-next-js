@@ -2,7 +2,7 @@ import React from "react";
 import Post from "./Post";
 import classes from "./PostsList.module.css";
 
-const PostsList = ({ posts, fetching }) => {
+const PostsList = ({ posts }) => {
   return (
     <ul className={classes.posts}>
       {posts.length === 0 && (
@@ -13,9 +13,15 @@ const PostsList = ({ posts, fetching }) => {
       )}
       {posts.length > 1 &&
         posts.map((post, idx) => {
-          const { name, greeting, rating } = post;
+          const { name, greeting, rating, id } = post;
           return (
-            <Post name={name} greeting={greeting} rating={rating} key={idx} />
+            <Post
+              name={name}
+              greeting={greeting}
+              rating={rating}
+              key={idx}
+              id={id}
+            />
           );
         })}
     </ul>

@@ -6,7 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./routes/Layout";
 import NewPost, { action as newPostAction } from "./routes/NewPost";
-import StarRating from "./routes/StarRating";
+import StarRating, {
+  loader as starRatingLoader,
+  action as starRatingAction,
+} from "./routes/StarRating";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -21,11 +24,16 @@ const router = createBrowserRouter([
         loader: PostsLoader,
         children: [
           {
-            path: "create-post",
+            path: "/create-post",
             element: <NewPost />,
             action: newPostAction,
           },
-          { path: "star-rating", element: <StarRating /> },
+          {
+            path: "/star-rating/:id",
+            element: <StarRating />,
+            loader: starRatingLoader,
+            action: starRatingAction,
+          },
         ],
       },
     ],
