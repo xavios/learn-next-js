@@ -18,8 +18,7 @@ export async function action({ request }) {
       "Content-Type": "application/json",
     },
   });
-  // TODO: in order to wait the damned dummy backend to reload with nodemon...
-  await new Promise((resolve, reject) => setTimeout(() => resolve(), 500));
+
   return redirect("/");
 }
 
