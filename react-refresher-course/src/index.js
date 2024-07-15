@@ -5,7 +5,7 @@ import Posts, { loader as PostsLoader } from "./routes/Posts";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./routes/Layout";
-import NewPost from "./routes/NewPost";
+import NewPost, { action as newPostAction } from "./routes/NewPost";
 import StarRating from "./routes/StarRating";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -20,7 +20,11 @@ const router = createBrowserRouter([
         element: <Posts />,
         loader: PostsLoader,
         children: [
-          { path: "create-post", element: <NewPost /> },
+          {
+            path: "create-post",
+            element: <NewPost />,
+            action: newPostAction,
+          },
           { path: "star-rating", element: <StarRating /> },
         ],
       },

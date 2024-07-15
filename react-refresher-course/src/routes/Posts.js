@@ -2,10 +2,7 @@ import "../components/Post";
 import PostsList from "../components/PostsList";
 import { Outlet, useLoaderData, defer, Await } from "react-router-dom";
 import React from "react";
-
-function randomInteger(min, max) {
-  return min + Math.floor(Math.random() * (max - min + 1));
-}
+import { randomInteger } from "../utils/misc";
 
 export default function Posts() {
   const data = useLoaderData();
@@ -25,7 +22,7 @@ export default function Posts() {
         >
           <Await
             resolve={data.namesAndGreetings}
-            errorElement={<p>Error loading package location!</p>}
+            errorElement={<p>Could not load posts.</p>}
           >
             {(namesAndGreetings) => {
               return <PostsList posts={namesAndGreetings} />;
@@ -42,12 +39,13 @@ export async function loader() {
     .then((fetchResult) => {
       return fetchResult.json();
     })
-    .then((result) =>
-      result.posts
+    .then((result) => {
+      console.log(JSON.stringify(result));
+      return result.posts
         .slice(0, randomInteger(1, result.posts.length - 1))
         .sort((a, b) => {
           return Math.random() > 0.5 ? 1 : -1;
-        })
-    );
+        });
+    });
   return defer({ namesAndGreetings: namesAndGreetings });
 }

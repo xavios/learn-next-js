@@ -229,6 +229,45 @@ routes - that way we will get an SPA navigation from site to site.
 programmatically navigate between routes. The created `navigate()` function should
 be called from a `useEffect()`.
 
+---
+
+Inside of routes you can define loaders to fetch data for the given route.
+
+`{path: "/", element: <Posts />, loader: PostsLoader}`
+
+You can have a loading state and use the data with the `useLoaderData` hook.
+
+```js
+import { defer, useLoaderData } from "react-router-dom";
+
+export default function MyComponent() {
+  const loaderData = useLoaderData();
+  return (
+    <main>
+      <React.Suspense fallback={<p>Loading...</p>}>
+        <Await resolve={loaderData.data} errorElement={<p>Error</p>}>
+          ((data) => <ChildComponent data={data} />)
+        </Await>
+      </React.Suspense>
+    </main>
+  );
+}
+
+// return a defered object for the data fetch
+export async function loader() {
+  const data = fetch("http://myapi.com/")
+    .then((res) => res.json())
+    .then((res) => res.data);
+  return defer({ data: data });
+}
+```
+
+You also can post data to APIs with actions from react-router-dom.
+Use actions and `Form`.
+
+The `Object.fromEntries()` static method transforms a list of key-value pairs
+into an object (Map --> object).
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
@@ -236,12 +275,9 @@ be called from a `useEffect()`.
 - HTML5 dialog tag
 - Typescript must be done
 - how does chat gpt work?
+- vite
 
 TODO:
 
 - parameterized route for editing the stars
 - put into containers and docker-compose the whole stuff
-
-- use an action to post the data
-- log down what you have learned about react-router-dom loaders and defer, Await,
-  React.Suspense

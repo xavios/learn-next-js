@@ -28,7 +28,7 @@ app.get("/posts/:id", async (req, res) => {
   res.json({ post });
 });
 
-app.post("/posts", async (req, res) => {
+app.post("/new-post", async (req, res) => {
   const existingPosts = await getStoredPosts();
   console.log(JSON.stringify(req.body));
   const postData = req.body;
