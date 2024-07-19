@@ -268,6 +268,20 @@ Use actions and `Form`.
 The `Object.fromEntries()` static method transforms a list of key-value pairs
 into an object (Map --> object).
 
+---
+
+# Next Js - Food Lovers project
+
+`page.tsx` and `layout.tsx` are reserved file names.
+Executed on the server and treated as a server component as of now.
+
+You need at least one `layout.tsx` file. Also you can embed them into each other.
+From layout you need to export the metadata with title and description.
+
+https://nextjs.org/docs/app/building-your-application/routing/colocation
+
+TODO: extract the header and put it in with a @/components/header import \o/
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
