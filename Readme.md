@@ -276,6 +276,8 @@ into an object (Map --> object).
 - Typescript must be done
 - how does chat gpt work?
 - vite
+- useMemo
+- useRef, forwardRef, useImperativeHandler
 
 TODO:
 
