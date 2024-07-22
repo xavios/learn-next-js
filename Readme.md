@@ -278,9 +278,34 @@ Executed on the server and treated as a server component as of now.
 You need at least one `layout.tsx` file. Also you can embed them into each other.
 From layout you need to export the metadata with title and description.
 
+Regarding to project organization, Next Js is not opinionated way to much. Here
+are some different strategies you could be going with:
 https://nextjs.org/docs/app/building-your-application/routing/colocation
 
-TODO: extract the header and put it in with a @/components/header import \o/
+### Reserved filenames in Next Js
+
+- **page.js** => Create a new page (e.g., app/about/page.js creates a
+  <your-domain>/about page)
+- **layout.js** => Create a new layout that wraps sibling and nested pages
+- **not-found.js** => Fallback page for "Not Found" errors (thrown by sibling or
+  nested pages or layouts)
+- **error.js** => Fallback page for other errors (thrown by sibling pages or
+  nested pages or layouts)
+- **loading.js** => Fallback page which is shown whilst sibling or nested pages
+  (or layouts) are fetching data
+- **route.js** => Allows you to create an API route (i.e., a page which does NOT
+  return JSX code but instead data, e.g., in the JSON format)
+
+https://nextjs.org/docs/app/api-reference/file-conventions
+
+### Dynamic routing
+
+- app
+  - blog
+    - [slug]
+      - page.tsx
+
+The component in page.tsx receives a props.params.slug with the variable content.
 
 ## Things to check on
 
