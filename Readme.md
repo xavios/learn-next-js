@@ -189,9 +189,15 @@ function MyComponent() {
 useEffect has a callback function and a dependencies array. If the deps array is
 not given it will run the callback on each re-render.
 
+### useMemo
+
+Call `useMemo` at the top level of your component to cache a calculation between
+re-renders.
+Use-case: skip costly recalculations.
+
 ## How to run the React Refresher Course?
 
-`npm i && npm start`
+`npm install-react-refresher && npm dev-react-refresher`
 With the magic of concurrently this should do the trick :)
 
 ### Routing
@@ -317,6 +323,8 @@ The component in page.tsx receives a props.params.slug with the variable content
 - vite
 - useMemo
 - useRef, forwardRef, useImperativeHandler
+
+- next js baseUrl?!
 
 TODO:
 

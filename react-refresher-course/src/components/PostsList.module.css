@@ -8,3 +8,16 @@
   grid-template-columns: repeat(3, 30%);
   justify-content: center;
 }
+
+.selector {
+  width: 100px;
+  margin: auto;
+}
+
+.selector select {
+  font-size: 22px;
+  background-color: #9c7eee;
+  color: #543280;
+  border-radius: 5px;
+  border: 1px solid black;
+}

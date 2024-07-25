@@ -24,9 +24,7 @@ export default function Posts() {
             resolve={data.namesAndGreetings}
             errorElement={<p>Could not load posts.</p>}
           >
-            {(namesAndGreetings) => {
-              return <PostsList posts={namesAndGreetings} />;
-            }}
+            {(namesAndGreetings) => <PostsList posts={namesAndGreetings} />}
           </Await>
         </React.Suspense>
       </main>
