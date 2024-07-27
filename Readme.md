@@ -329,3 +329,4 @@ The component in page.tsx receives a props.params.slug with the variable content
 TODO:
 
 - put into containers and docker-compose the whole stuff
+
