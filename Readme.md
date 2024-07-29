@@ -290,16 +290,16 @@ https://nextjs.org/docs/app/building-your-application/routing/colocation
 
 ### Reserved filenames in Next Js
 
-- **page.js** => Create a new page (e.g., app/about/page.js creates a
+- **page.tsx** => Create a new page (e.g., app/about/page.js creates a
   <your-domain>/about page)
-- **layout.js** => Create a new layout that wraps sibling and nested pages
-- **not-found.js** => Fallback page for "Not Found" errors (thrown by sibling or
+- **layout.tsx** => Create a new layout that wraps sibling and nested pages
+- **not-found.tsx** => Fallback page for "Not Found" errors (thrown by sibling or
   nested pages or layouts)
-- **error.js** => Fallback page for other errors (thrown by sibling pages or
+- **error.tsx** => Fallback page for other errors (thrown by sibling pages or
   nested pages or layouts)
-- **loading.js** => Fallback page which is shown whilst sibling or nested pages
+- **loading.tsx** => Fallback page which is shown whilst sibling or nested pages
   (or layouts) are fetching data
-- **route.js** => Allows you to create an API route (i.e., a page which does NOT
+- **route.tsx** => Allows you to create an API route (i.e., a page which does NOT
   return JSX code but instead data, e.g., in the JSON format)
 
 https://nextjs.org/docs/app/api-reference/file-conventions
@@ -311,7 +311,11 @@ https://nextjs.org/docs/app/api-reference/file-conventions
     - [slug]
       - page.tsx
 
-The component in page.tsx receives a props.params.slug with the variable content.
+The component in `page.tsx` receives a `props.params.slug` with the slug
+variable content.
+
+Use `<Image />` from `next/image` to harness the power of NextJs based image
+optimization.
 
 ## Things to check on
 
@@ -328,5 +332,6 @@ The component in page.tsx receives a props.params.slug with the variable content
 
 TODO:
 
+- understanding the Server side vs Client side components
+  https://www.freecodecamp.org/news/how-to-use-react-server-components/
 - put into containers and docker-compose the whole stuff
-
