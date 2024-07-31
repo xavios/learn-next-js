@@ -320,9 +320,12 @@ optimization.
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
+- also flexbox needs to be learned again.. :)
 - Common js vs Es module?
 - HTML5 dialog tag
 - Typescript must be done
+  - https://www.freecodecamp.org/news/learn-typescript-with-interactive-lessons/
+  - https://www.freecodecamp.org/news/learn-typescript-for-practical-projects/
 - how does chat gpt work?
 - vite
 - useMemo
