@@ -3,6 +3,8 @@ import Image from "next/image";
 import logoImage from "@/assets/logo.png";
 import classes from "./MainHeader.module.css";
 import MainHeaderBackground from "./MainHeaderBackground";
+import { usePathname } from "next/navigation";
+import HeaderLink from "./HeaderLink";
 
 export default function MainHeader() {
   return (
@@ -20,16 +22,19 @@ export default function MainHeader() {
         <nav className={classes.nav}>
           <ul>
             <li>
-              <Link href="/meals">Meals</Link>
+              <HeaderLink href="/meals" text="Meals" />
             </li>
             <li>
-              <Link href="/meals/hamburger">A nice greasy hamburger!</Link>
+              <HeaderLink
+                href="/meals/hamburger"
+                text="A nice greasy hamburger!"
+              />
             </li>
             <li>
-              <Link href="/community">Community</Link>
+              <HeaderLink href="/community" text="Community" />
             </li>
             <li>
-              <Link href="/meals/share">Share meals</Link>
+              <HeaderLink href="/meals/share" text="Share meals" />
             </li>
           </ul>
         </nav>
