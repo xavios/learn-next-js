@@ -2,12 +2,10 @@ import React from "react";
 import Link from "next/link";
 import classes from "./page.module.css";
 import MealGrid from "@/components/meals/mealGrid";
-import db from "better-sqlite3";
+import getMeals from "@/lib/get-meals";
 
-const Meals = () => {
-  const mealsDb = db("././meals.db");
-  const meals = mealsDb.prepare("SELECT * FROM meals;").all();
-
+const Meals = async () => {
+  const meals = await getMeals();
   return (
     <>
       <header className={classes.header}>
