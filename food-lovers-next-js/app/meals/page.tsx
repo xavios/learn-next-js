@@ -2,10 +2,12 @@ import React from "react";
 import Link from "next/link";
 import classes from "./page.module.css";
 import MealGrid from "@/components/meals/mealGrid";
-import testImg from "@/assets/burger.jpg";
-import testImg1 from "@/assets/schnitzel.jpg";
+import db from "better-sqlite3";
 
 const Meals = () => {
+  const mealsDb = db("././meals.db");
+  const meals = mealsDb.prepare("SELECT * FROM meals;").all();
+
   return (
     <>
       <header className={classes.header}>
@@ -21,24 +23,7 @@ const Meals = () => {
         </p>
       </header>
       <main>
-        <MealGrid
-          meals={[
-            {
-              slug: "hello",
-              title: "A nice burger",
-              image: testImg,
-              summary: "just a test burger to chew on",
-              creator: "QA department",
-            },
-            {
-              slug: "test2",
-              title: "Schnitzel",
-              image: testImg1,
-              summary: "just a schnitzel to suck on?!",
-              creator: "QA department",
-            },
-          ]}
-        />
+        <MealGrid meals={meals} />
       </main>
     </>
   );
