@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import classes from "./mealItem.module.css";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { Meal } from "@/components/meals/mealType";
 
 export default function MealItem({
   title,
@@ -10,13 +10,7 @@ export default function MealItem({
   image,
   summary,
   creator,
-}: {
-  title: string;
-  slug: string;
-  image: StaticImport;
-  summary: string;
-  creator: string;
-}) {
+}: Meal) {
   return (
     <article className={classes.meal}>
       <header>

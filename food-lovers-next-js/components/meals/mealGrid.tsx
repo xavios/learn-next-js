@@ -1,21 +1,9 @@
 import React from "react";
 import classes from "./mealGrid.module.css";
 import MealItem from "./mealItem";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { Meal } from "@/components/meals/mealType";
 
-const MealGrid = ({
-  meals,
-}: {
-  meals: [
-    {
-      title: string;
-      slug: string;
-      image: StaticImport;
-      summary: string;
-      creator: string;
-    }
-  ];
-}) => {
+const MealGrid = ({ meals }: { meals: Meal[] }) => {
   return (
     <ul className={classes.meals}>
       {meals.map((meal) => (
