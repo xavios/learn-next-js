@@ -56,3 +56,18 @@ main ul {
   font-weight: 500;
   color: #ddd8d8;
 }
+
+.error button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, #f9572a, #ff9b05);
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.error .error-message {
+  color: red;
+}
