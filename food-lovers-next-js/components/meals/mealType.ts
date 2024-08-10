@@ -6,4 +6,6 @@ export interface Meal {
   image: StaticImport;
   summary: string;
   creator: string;
+  creator_email: string;
+  instructions: string;
 }

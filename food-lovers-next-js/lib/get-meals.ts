@@ -4,6 +4,8 @@ export function randomInteger(min: number, max: number): number {
   return min + Math.floor(Math.random() * (max - min + 1));
 }
 
+const database = db("././meals.db");
+
 export default async function getMeals() {
   console.log("start:", new Date());
   await new Promise((resolve) => {
@@ -18,6 +20,9 @@ export default async function getMeals() {
     );
   }
 
-  const mealsDb = db("././meals.db");
-  return mealsDb.prepare("SELECT * FROM meals;").all();
+  return database.prepare("SELECT * FROM meals;").all();
+}
+
+export function getMeal(slug: string) {
+  return database.prepare("SELECT * FROM meals where slug = ?").get(slug);
 }
