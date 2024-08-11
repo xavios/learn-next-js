@@ -195,6 +195,20 @@ Call `useMemo` at the top level of your component to cache a calculation between
 re-renders.
 Use-case: skip costly recalculations.
 
+### useRef
+
+`useRef` is a React hook that lets you reference a value that is not needed for
+rendering.
+
+You cna store information between rerenders, which is not the case with regular
+variables. Changing the information does not trigger a re-render (not like
+state). Information is local to each copy of your component.
+
+React has built in support to manipulate the DOM with a ref. You can pass a ref
+object to the ref value of a JSX element. After React creates the DOM node and
+puts it on the screen, React will set the current property of your ref object to
+that DOM node.
+
 ## How to run the React Refresher Course?
 
 `npm install-react-refresher && npm dev-react-refresher`
@@ -317,6 +331,11 @@ variable content.
 Use `<Image />` from `next/image` to harness the power of NextJs based image
 optimization.
 
+---
+
+One can redirect the user to the closest `not-found.tsx`, with simply calling
+`notFound()` from `next/navigation`.
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
@@ -335,6 +354,4 @@ optimization.
 
 TODO:
 
-- understanding the Server side vs Client side components
-  https://www.freecodecamp.org/news/how-to-use-react-server-components/
 - put into containers and docker-compose the whole stuff
