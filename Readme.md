@@ -336,6 +336,23 @@ optimization.
 One can redirect the user to the closest `not-found.tsx`, with simply calling
 `notFound()` from `next/navigation`.
 
+### "use server" directive
+
+You can ensure that a form is processed by the magic of NextJs on the backend
+side.
+
+1. you create an async function, that as a first line contains the `use server;`
+   directive
+2. you make sure to set the `action` prop of the form to this function
+3. you submit your form, and NextJS will submit it to new POST endpoint!
+
+```bash
+curl 'http://localhost:3000/meals/share' --compressed -X POST -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0' -H 'Accept: text/x-component' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br, zstd' -H 'Referer: http://localhost:3000/meals/share' -H 'Next-Action: bd1b557989394b88dfdfe6517725ce51d94bd8f6' -H 'Next-Router-State-Tree: %5B%22%22%2C%7B%22children%22%3A%5B%22meals%22%2C%7B%22children%22%3A%5B%22share%22%2C%7B%22children%22%3A%5B%22__PAGE__%22%2C%7B%7D%2C%22%2Fmeals%2Fshare%22%2C%22refresh%22%5D%7D%5D%7D%5D%7D%2Cnull%2Cnull%2Ctrue%5D' -H 'Content-Type: multipart/form-data; boundary=---------------------------17785095919373405401561800468' -H 'Origin: http://localhost:3000' -H 'Connection: keep-alive' -H 'Sec-Fetch-Dest: empty' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Site: same-origin' -H 'Priority: u=0' --data-binary $'-----------------------------17785095919373405401561800468\r\nContent-Disposition: form-data; name="1_name"\r\n\r\nAndr\xc3\xa1s\r\n-----------------------------17785095919373405401561800468\r\nContent-Disposition: form-data; name="1_email"\r\n\r\nandras@acs.hu\r\n-----------------------------17785095919373405401561800468\r\nContent-Disposition: form-data; name="1_title"\r\n\r\nTest my image submission\r\n-----------------------------17785095919373405401561800468\r\nContent-Disposition: form-data; name="1_summary"\r\n\r\nA test summary\r\n-----------------------------17785095919373405401561800468\r\nContent-Disposition: form-data; name="1_instructions"\r\n\r\nThese are my test instructions\r\n-----------------------------17785095919373405401561800468\r\nContent-Disposition: form-data; name="1_image-picker"; filename="adasveteli-3.jpg"\r\nContent-Type: image/jpeg\r\n\r\n-----------------------------17785095919373405401561800468\r\nContent-Disposition: form-data; name="0"\r\n\r\n["$K1"]\r\n-----------------------------17785095919373405401561800468--\r\n'
+```
+
+With this, then in the function you can easily process the submitted form data.
+Crazy times we live in 🥲🥲🥲!
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
@@ -348,7 +365,7 @@ One can redirect the user to the closest `not-found.tsx`, with simply calling
 - how does chat gpt work?
 - vite
 - useMemo
-- useRef, forwardRef, useImperativeHandler
+- forwardRef, useImperativeHandler
 
 - next js baseUrl?!
 

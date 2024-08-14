@@ -52,6 +52,7 @@ const ImagePicker = ({ name }: { name: string }) => {
             accept="image/png, image/jpeg"
             ref={imageInput}
             onChange={handleOnFileChange}
+            required
           />
           <button
             type="button"
