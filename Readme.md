@@ -336,7 +336,7 @@ optimization.
 One can redirect the user to the closest `not-found.tsx`, with simply calling
 `notFound()` from `next/navigation`.
 
-### "use server" directive
+### Server Actions
 
 You can ensure that a form is processed by the magic of NextJs on the backend
 side.
