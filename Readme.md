@@ -200,7 +200,7 @@ Use-case: skip costly recalculations.
 `useRef` is a React hook that lets you reference a value that is not needed for
 rendering.
 
-You cna store information between rerenders, which is not the case with regular
+You can store information between rerenders, which is not the case with regular
 variables. Changing the information does not trigger a re-render (not like
 state). Information is local to each copy of your component.
 
