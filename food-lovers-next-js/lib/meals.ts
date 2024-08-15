@@ -1,6 +1,5 @@
 import { Meal } from "@/components/meals/mealType";
 import db from "better-sqlite3";
-import slugify from "slugify";
 import xss from "xss";
 
 export function randomInteger(min: number, max: number): number {
@@ -16,7 +15,7 @@ export default async function getMeals() {
   });
   console.log("end:", new Date());
 
-  if (randomInteger(1, 10) > 5) {
+  if (randomInteger(1, 10) > 7) {
     throw new Error(
       `A random error has been thrown to check the error handling capabilities
       of NextJs.`
@@ -31,7 +30,6 @@ export function getMeal(slug: string) {
 }
 
 export function saveMeal(meal: Meal) {
-  meal.slug = slugify(meal.title, { lower: true });
   meal.instructions = xss(meal.instructions);
 
   database
@@ -48,4 +46,8 @@ export function saveMeal(meal: Meal) {
       )`
     )
     .run(meal);
+}
+
+export function deleteMeal(slug: string) {
+  database.prepare("DELETE FROM meals WHERE slug = ?").run(slug);
 }
