@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import classes from "./page.module.css";
 import MealGrid from "@/components/meals/mealGrid";
-import getMeals from "@/lib/get-meals";
+import getMeals from "@/lib/meals";
 import LoadingMeals from "./loading-meals";
 import { Meal } from "@/components/meals/mealType";
 

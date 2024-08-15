@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { getMeal } from "@/lib/get-meals";
+import { getMeal } from "@/lib/meals";
 import classes from "./page.module.css";
 import Image from "next/image";
 import { Meal } from "@/components/meals/mealType";

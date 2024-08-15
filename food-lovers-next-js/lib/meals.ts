@@ -1,4 +1,7 @@
+import { Meal } from "@/components/meals/mealType";
 import db from "better-sqlite3";
+import slugify from "slugify";
+import xss from "xss";
 
 export function randomInteger(min: number, max: number): number {
   return min + Math.floor(Math.random() * (max - min + 1));
@@ -25,4 +28,24 @@ export default async function getMeals() {
 
 export function getMeal(slug: string) {
   return database.prepare("SELECT * FROM meals where slug = ?").get(slug);
+}
+
+export function saveMeal(meal: Meal) {
+  meal.slug = slugify(meal.title, { lower: true });
+  meal.instructions = xss(meal.instructions);
+
+  database
+    .prepare(
+      `INSERT INTO meals VALUES (
+        null,
+        @slug,
+        @title,
+        @image,
+        @summary,
+        @instructions,
+        @creator,
+        @creator_email
+      )`
+    )
+    .run(meal);
 }
