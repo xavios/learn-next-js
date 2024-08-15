@@ -6,7 +6,15 @@ import slugify from "slugify";
 import fs from "node:fs";
 import { redirect } from "next/navigation";
 
+function invalidText(text: string) {
+  return !text || text.trim() === "";
+}
+
 export async function shareMeal(formData: FormData) {
+  await new Promise((resolve) => {
+    setTimeout(resolve, 1500);
+  });
+
   const formEntries = Object.fromEntries(formData);
   const meal = {
     slug: "",
@@ -19,6 +27,40 @@ export async function shareMeal(formData: FormData) {
   } as Meal;
   meal.slug = slugify(meal.title, { lower: true });
 
+  validateMeal(meal);
+
+  const fileName = await saveImage(formEntries, meal);
+
+  meal.image = `/images/${fileName}`;
+
+  saveMeal(meal);
+
+  redirect("/meals");
+}
+
+function validateMeal(meal: Meal) {
+  for (const [key, value] of Object.entries(meal)) {
+    if (key === "creator_email") {
+      if (!value.indexOf("@")) {
+        throw new Error("Email must contain a @ symbol!");
+      }
+      continue;
+    }
+    if (key === "image-picker") {
+      if (!value || (value as File).size === 0) {
+        throw new Error("Image is empty!");
+      }
+    }
+    if (invalidText(value)) {
+      throw new Error(`Invalid ${key} value provided`);
+    }
+  }
+}
+
+async function saveImage(
+  formEntries: { [k: string]: FormDataEntryValue },
+  meal: Meal
+) {
   const image = formEntries["image-picker"] as File;
   const extension = image.name.split(".").pop();
   const fileName = `${meal.slug}.${extension}`;
@@ -30,12 +72,7 @@ export async function shareMeal(formData: FormData) {
       throw new Error(`image upload failed: ${JSON.stringify(err)}`);
     }
   });
-
-  meal.image = `/images/${fileName}`;
-
-  saveMeal(meal);
-
-  redirect("/meals");
+  return fileName;
 }
 
 export async function deleteMeal(formData: FormData) {

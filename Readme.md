@@ -46,6 +46,11 @@ app/awesome/page.js
 
 ## React Refresher
 
+### How to run the React Refresher Course?
+
+`yarn install & yarn dev-react-refresher`
+With the magic of yarn & concurrently this should do the trick!
+
 https://github.com/academind/react-complete-guide-course-resources/tree/main/code/30%20React%20Summary
 
 React is a javascript library to build user interfaces.
@@ -209,10 +214,16 @@ object to the ref value of a JSX element. After React creates the DOM node and
 puts it on the screen, React will set the current property of your ref object to
 that DOM node.
 
-## How to run the React Refresher Course?
+### useFormStatus
 
-`npm install-react-refresher && npm dev-react-refresher`
-With the magic of concurrently this should do the trick :)
+The `useFormStatus` Hook provides status information of the last form submission.
+
+The `useFormStatus` Hook must be called from a component that is rendered inside
+a <form>. `useFormStatus` will only return status information for a
+parent <form>. It will not return status information for any <form>
+rendered in that same component or children components.
+
+`const { pending, data, method, action } = useFormStatus();`
 
 ### Routing
 
@@ -362,12 +373,12 @@ Crazy times we live in 🥲🥲🥲!
 - Typescript must be done
   - https://www.freecodecamp.org/news/learn-typescript-with-interactive-lessons/
   - https://www.freecodecamp.org/news/learn-typescript-for-practical-projects/
-- how does chat gpt work?
 - vite
-- useMemo
 - forwardRef, useImperativeHandler
+- how to do custom hooks and why?!
 
 - next js baseUrl?!
+- how does chat gpt work? - Gergely Orosz presentation links should have that
 
 TODO:
 
