@@ -225,6 +225,16 @@ rendered in that same component or children components.
 
 `const { pending, data, method, action } = useFormStatus();`
 
+### useFormState
+
+`useFormState` is a Hook that allows you to update state based on the result
+of a form action.
+
+`const [formState, formAction] = useFormState(serverAction, initialState);`
+
+`useFormState` acts as a middle man between your form submission and your server
+action. This ultimately let your form behave in an interactive way.
+
 ### Routing
 
 Layout routes: other routes are embedded into it.

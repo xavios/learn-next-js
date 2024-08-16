@@ -7,10 +7,17 @@ import fs from "node:fs";
 import { redirect } from "next/navigation";
 
 function invalidText(text: string) {
-  return !text || text.trim() === "";
+  return !text || !text.trim || text.trim() === "";
 }
 
-export async function shareMeal(formData: FormData) {
+export interface ShareMealFormState {
+  message: string;
+}
+
+export async function shareMeal(
+  previousState: ShareMealFormState,
+  formData: FormData
+): Promise<ShareMealFormState> {
   await new Promise((resolve) => {
     setTimeout(resolve, 1500);
   });
@@ -27,7 +34,10 @@ export async function shareMeal(formData: FormData) {
   } as Meal;
   meal.slug = slugify(meal.title, { lower: true });
 
-  validateMeal(meal);
+  const invalidData = validateMeal(meal);
+  if (invalidData && (invalidData as ShareMealFormState).message !== "") {
+    return invalidData as ShareMealFormState;
+  }
 
   const fileName = await saveImage(formEntries, meal);
 
@@ -38,21 +48,21 @@ export async function shareMeal(formData: FormData) {
   redirect("/meals");
 }
 
-function validateMeal(meal: Meal) {
+function validateMeal(meal: Meal): ShareMealFormState | unknown {
   for (const [key, value] of Object.entries(meal)) {
     if (key === "creator_email") {
       if (!value.indexOf("@")) {
-        throw new Error("Email must contain a @ symbol!");
+        return { message: "Email must contain a @ symbol!" };
       }
       continue;
     }
     if (key === "image-picker") {
       if (!value || (value as File).size === 0) {
-        throw new Error("Image is empty!");
+        return { message: "Image is empty!" };
       }
     }
     if (invalidText(value)) {
-      throw new Error(`Invalid ${key} value provided`);
+      return { message: `Invalid ${key} value provided` };
     }
   }
 }
