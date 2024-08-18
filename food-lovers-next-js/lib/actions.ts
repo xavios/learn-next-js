@@ -5,6 +5,7 @@ import { saveMeal, deleteMeal as dbDeleteMeal } from "./meals";
 import slugify from "slugify";
 import fs from "node:fs";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 function invalidText(text: string) {
   return !text || !text.trim || text.trim() === "";
@@ -45,6 +46,8 @@ export async function shareMeal(
 
   saveMeal(meal);
 
+  revalidatePath("/meals");
+
   redirect("/meals");
 }
 
@@ -56,10 +59,11 @@ function validateMeal(meal: Meal): ShareMealFormState | unknown {
       }
       continue;
     }
-    if (key === "image-picker") {
+    if (key === "image") {
       if (!value || (value as File).size === 0) {
         return { message: "Image is empty!" };
       }
+      continue;
     }
     if (invalidText(value)) {
       return { message: `Invalid ${key} value provided` };

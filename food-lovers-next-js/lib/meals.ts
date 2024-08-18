@@ -15,7 +15,7 @@ export default async function getMeals() {
   });
   console.log("end:", new Date());
 
-  if (randomInteger(1, 10) > 7) {
+  if (randomInteger(1, 10) > 7 && process.env.NODE_ENV !== "production") {
     throw new Error(
       `A random error has been thrown to check the error handling capabilities
       of NextJs.`

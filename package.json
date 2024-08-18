@@ -12,7 +12,8 @@
     "install-react-refresher": "concurrently \"cd ./dummy-backend && yarn install\" \"cd ./react-refresher-course && yarn install\" ",
     "dev-react-refresher": "concurrently \"cd ./dummy-backend && yarn start\" \"cd ./react-refresher-course && yarn start\" ",
     "install-food-lovers": "cd ./food-lovers-next-js && yarn install",
-    "dev-food-lovers": "cd ./food-lovers-next-js && yarn run dev"
+    "dev-food-lovers": "cd ./food-lovers-next-js && yarn run dev",
+    "prod-food-lovers": "cd ./food-lovers-next-js && yarn run build && yarn run start"
   },
   "repository": {
     "type": "git",

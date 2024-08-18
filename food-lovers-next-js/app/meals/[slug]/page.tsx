@@ -1,11 +1,27 @@
 import React from "react";
-import Link from "next/link";
 import { getMeal } from "@/lib/meals";
 import classes from "./page.module.css";
 import Image from "next/image";
 import { Meal } from "@/components/meals/mealType";
 import { notFound } from "next/navigation";
 import { deleteMeal } from "@/lib/actions";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const meal = getMeal(params.slug) as Meal;
+
+  if (!meal) {
+    notFound();
+  }
+
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
 
 const page = ({ params }: { params: { slug: string } }) => {
   const meal = getMeal(params.slug) as Meal;

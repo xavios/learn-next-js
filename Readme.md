@@ -374,6 +374,27 @@ curl 'http://localhost:3000/meals/share' --compressed -X POST -H 'User-Agent: Mo
 With this, then in the function you can easily process the submitted form data.
 Crazy times we live in 🥲🥲🥲!
 
+### Building for production
+
+So far we only started our dev server, with `yarn run dev`, in which we did not
+use the heavy-weight caching of NextJs.
+
+We can build production code with `yarn run build` and server it with
+`yarn run start`. In this version NextJs will generate static pages fetching
+the data the same way how we would be fetching it during runtime, but now this
+time it is happening in build time.
+
+To enable dynamic behavior and purging the cache we need to use `revalidatePath()`
+function after we are executing some data-mutations.
+
+`revalidatePath(path, "page" (default) / "layout")` --> "layout" takes care of
+all sub-paths as well.
+
+### Metadata
+
+Each page can export either a `metadata` constant or a `generateMetadata(props)`
+async function with which NextJS can generate the HTML metadata & title tags.
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
