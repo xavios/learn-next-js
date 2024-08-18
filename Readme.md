@@ -395,6 +395,63 @@ all sub-paths as well.
 Each page can export either a `metadata` constant or a `generateMetadata(props)`
 async function with which NextJS can generate the HTML metadata & title tags.
 
+# Javascript internals
+
+## Single threaded
+
+Js has only one thread to execute program steps in the Js Engine.
+
+## Non-blocking
+
+An instruction is not awaited by default, other instructions can start.
+
+## Asynchronous
+
+The Js Engine calls to APIs in the JS runtime and lets them execute tasks
+while continuing to work on its own set of instructions.
+
+## How it works?
+
+The JS engine parses the JS code and puts all function calls on a stack. It
+executes the instructions from the stack, until it meets a task that can
+be only executed by an API in the Js Runtime (setTimeout, setInterval, DOM
+manipulation, fetch, etc..).
+
+Then that instruction is set to the API, which works on it, while the single
+threaded JS engine continues to execute the instructions on the stack.
+
+Once a runtime task is done, a callback is put on the callback queue. The event-
+loop ensures that once the stack is not containing any more instructions to
+execute, then the first element is shifted from the callback queue to execute.
+
+```js
+function run() {
+  run1();
+  console.log("a");
+  setTimeout(() => {
+    console.log("b");
+  }, 0);
+  console.log("c");
+}
+
+function run1() {
+  console.log("d");
+  setTimeout(() => console.log("e"), 0);
+}
+```
+
+This outputs:
+
+```js
+"d"; // run1 instruction from the stack
+"a"; // run instruction from the stack
+"c"; // run instruction from the stack
+"e"; // from the callback queue (pushed first)
+"b"; // from the callback queue (pushed second)
+```
+
+As written here: https://www.freecodecamp.org/news/javascript-asynchronous-operations-in-the-browser/
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
