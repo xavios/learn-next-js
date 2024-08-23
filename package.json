@@ -7,13 +7,15 @@
     "node": ">=20.13.1"
   },
   "scripts": {
-    "postinstall": "concurrently \"yarn run install-react-refresher\" \"yarn run install-food-lovers\"",
+    "postinstall": "concurrently -p \"[{index}] - [{pid}]\" \"yarn run install-react-refresher\" \"yarn run install-food-lovers\" \"yarn run install-routing-news\"",
     "help": "yarn run",
     "install-react-refresher": "concurrently \"cd ./dummy-backend && yarn install\" \"cd ./react-refresher-course && yarn install\" ",
     "dev-react-refresher": "concurrently \"cd ./dummy-backend && yarn start\" \"cd ./react-refresher-course && yarn start\" ",
     "install-food-lovers": "cd ./food-lovers-next-js && yarn install",
     "dev-food-lovers": "cd ./food-lovers-next-js && yarn run dev",
-    "prod-food-lovers": "cd ./food-lovers-next-js && yarn run build && yarn run start"
+    "prod-food-lovers": "cd ./food-lovers-next-js && yarn run build && yarn run start",
+    "install-routing-news": "cd ./routing-news && yarn install",
+    "dev-routing-news": "cd ./routing-news && yarn run dev"
   },
   "repository": {
     "type": "git",
