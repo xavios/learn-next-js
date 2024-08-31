@@ -395,6 +395,8 @@ all sub-paths as well.
 Each page can export either a `metadata` constant or a `generateMetadata(props)`
 async function with which NextJS can generate the HTML metadata & title tags.
 
+---
+
 # Javascript internals
 
 ## Single threaded
@@ -438,6 +440,8 @@ function run1() {
   console.log("d");
   setTimeout(() => console.log("e"), 0);
 }
+
+run();
 ```
 
 This outputs:
@@ -451,8 +455,6 @@ This outputs:
 ```
 
 As written here: https://www.freecodecamp.org/news/javascript-asynchronous-operations-in-the-browser/
-
-TODO: how can we serve a website / how does the data transformation stuff work?
 
 ## How `this` works?
 
@@ -508,6 +510,11 @@ point.toString.apply(anotherPoint, []); // prints (4,5)
 point.toString.call(yetAnotherPoint); // prints (6,7)
 ```
 
+For `apply()` you provide the first argumentum as the `this`, and inside an array
+you provide the remaining argumentums of the function.
+For `call()` you provide the first argumentum as the `this`, and then the
+remaining arguments of the function.
+
 We can "borrow" functions from other objects this way.
 
 ## New context invocation
@@ -530,6 +537,7 @@ laptop.sleep(); // MBP goes to sleep
 
 const dell = new laptop.sleep(); // undefined goes to sleep
 console.log(dell.__proto__); // Object {constructor: sleep()}
+console.log(dell.__proto__ == laptop.sleep.prototype); // true
 ```
 
 ## Rules to decide what will be `this`
@@ -576,6 +584,7 @@ But in the arrow function case the `this` will be the `this` of the parent scope
 - VITEST / cypress
 - lexical scope / closures
 - prototypical inheritance
+- How can we serve a website / how does the data transformation stuff work?
 
 - next js baseUrl?!
 - how does chat gpt work? - Gergely Orosz presentation links should have that
