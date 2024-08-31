@@ -452,6 +452,115 @@ This outputs:
 
 As written here: https://www.freecodecamp.org/news/javascript-asynchronous-operations-in-the-browser/
 
+TODO: how can we serve a website / how does the data transformation stuff work?
+
+## How `this` works?
+
+`this` is like an implicit parameter for a function.
+
+JS has lexical scope, that is a static context in which the function lexical
+identifiers will be executing. Lexical scope is always static, we create it during
+author time, and they will be unaffected during runtime.
+
+`this` allows us to have a way to call our functions with a dynamic context.
+
+## Implicit context invocation
+
+```js
+
+let point = {
+  x: null,
+  y: null,
+  init(x,y) = {
+    this.x = x;
+    this.y = y;
+  },
+  toString() {
+    return `(${this.x},${this.y})`
+  }
+}
+```
+
+`point.init(1,2); point.toString();` --> `this` will reference to the `point`
+object.
+
+## Default context invocation
+
+In `"use strict";` mode `this` will be set to `undefined`. This behavior will
+raise a `TypeError` upon invoking the this-aware function, signaling us, that
+we did not provide explicitly a `this` binding.
+
+In non strict mode, in the browser the default `this` will bind to `window`, in
+Node it will bind to `global` object.
+
+See reference file: `js-basics/this-default-context-invocation.js`.
+
+## Explicit context invocation
+
+Use `call()` or `apply()` to set the value for `this` for a function invocation.
+
+```js
+let anotherPoint = {};
+let yetAnotherPoint = {};
+point.init.call(anotherPoint, 4, 5);
+point.init.apply(yetAnotherPoint, [6, 7]);
+point.toString.apply(anotherPoint, []); // prints (4,5)
+point.toString.call(yetAnotherPoint); // prints (6,7)
+```
+
+We can "borrow" functions from other objects this way.
+
+## New context invocation
+
+Upon calling a `new` on a function, it will create a new object, set the prototype
+reference of the new object to the original function's prototype, set the `this`
+value for the new object and call the function, and if the function does not
+return explicitly an object, then it will return the newly created object,
+otherwise the object that is returned from the called function.
+
+```js
+const laptop = {
+  sleep: function () {
+    console.log(`${this.name} goes to sleep`);
+  },
+};
+
+laptop.name = "MBP";
+laptop.sleep(); // MBP goes to sleep
+
+const dell = new laptop.sleep(); // undefined goes to sleep
+console.log(dell.__proto__); // Object {constructor: sleep()}
+```
+
+## Rules to decide what will be `this`
+
+1. Is the function invoked with new, creating and setting a new this?
+2. Is the function invoked with call(..) or apply(..), explicitly setting this?
+3. Is the function invoked with an object reference at the call-site
+   (e.g., point.init(..)), implicitly setting this?
+4. If none of the above... are we in non-strict mode? If so, default the this to
+   globalThis. But if in strict-mode, default the this to undefined.
+
+## DOM event listeners
+
+```js
+const myElement = document.getElementById("myElement");
+myElement.addEventListener("click", function () {
+  console.log(this);
+});
+```
+
+In the above case the `this` will reference the DOM object.
+
+```js
+const myElement = document.getElementById("myElement");
+myElement.addEventListener("click", () => {
+  console.log(this);
+});
+```
+
+But in the arrow function case the `this` will be the `this` of the parent scope!
+
 ## Things to check on
 
 - _CSS grid_ is used in the CSS, so I think further down I should learn it.
@@ -464,6 +573,9 @@ As written here: https://www.freecodecamp.org/news/javascript-asynchronous-opera
 - vite
 - forwardRef, useImperativeHandler
 - how to do custom hooks and why?!
+- VITEST / cypress
+- lexical scope / closures
+- prototypical inheritance
 
 - next js baseUrl?!
 - how does chat gpt work? - Gergely Orosz presentation links should have that
