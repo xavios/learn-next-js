@@ -60,7 +60,8 @@ Imperative (jQuery, default javascript way) vs declarative code (React).
 
 _Declarative programming_ is a paradigm that focuses on what the program should
 achieve, without explicitly stating how to achieve it. It is a high-level concept
-that abstracts the intricacies of the underlying system.
+that abstracts the intricacies of the underlying system. Examples could be: SQL,
+React JSX
 
 _Imperative programming_ is a paradigm where you explicitly state how the program
 should achieve the desired result. You write step-by-step instructions for the
@@ -98,7 +99,8 @@ html tags.
 
 `<h1>{4+4}</h1>` whatever is in the curly braces is calculated by the JS engine
 
-`rafce` --> React Functional Component skeleton ins VSCode.
+`rafce` --> React Functional Component skeleton in VSCode.
+Extension that allows this: ES7+ React/Redux/React-Native snippets.
 
 An element must return with a highest level tag / component.
 You can use self closing tags, like `<Post />`
@@ -210,7 +212,7 @@ variables. Changing the information does not trigger a re-render (not like
 state). Information is local to each copy of your component.
 
 React has built in support to manipulate the DOM with a ref. You can pass a ref
-object to the ref value of a JSX element. After React creates the DOM node and
+object to the ref prop of a JSX element. After React creates the DOM node and
 puts it on the screen, React will set the current property of your ref object to
 that DOM node.
 
@@ -379,7 +381,7 @@ Crazy times we live in 🥲🥲🥲!
 So far we only started our dev server, with `yarn run dev`, in which we did not
 use the heavy-weight caching of NextJs.
 
-We can build production code with `yarn run build` and server it with
+We can build production code with `yarn run build` and serve it with
 `yarn run start`. In this version NextJs will generate static pages fetching
 the data the same way how we would be fetching it during runtime, but now this
 time it is happening in build time.
@@ -394,6 +396,25 @@ all sub-paths as well.
 
 Each page can export either a `metadata` constant or a `generateMetadata(props)`
 async function with which NextJS can generate the HTML metadata & title tags.
+
+### Parallel routes
+
+Parallel Routes allows you to simultaneously or conditionally render one or more
+pages within the same layout. They are useful for highly dynamic sections of an
+app, such as dashboards and feeds on social sites.
+
+You can create them like this:
+
+- app
+  - archive
+    - @archive
+      - page.tsx
+    - @latest
+      - page.tsx
+    - layout.tsx
+
+Then the `layout.tsx` will receive `{children, archive, latest}` props, so it can
+render the parallel routes. All of the pages will be reachable under `/archive`.
 
 ---
 
@@ -513,7 +534,7 @@ point.toString.call(yetAnotherPoint); // prints (6,7)
 For `apply()` you provide the first argumentum as the `this`, and inside an array
 you provide the remaining argumentums of the function.
 For `call()` you provide the first argumentum as the `this`, and then the
-remaining arguments of the function.
+remaining argumentums of the function.
 
 We can "borrow" functions from other objects this way.
 
@@ -521,7 +542,7 @@ We can "borrow" functions from other objects this way.
 
 Upon calling a `new` on a function, it will create a new object, set the prototype
 reference of the new object to the original function's prototype, set the `this`
-value for the new object and call the function, and if the function does not
+value for the new object and .call() the function, and if the function does not
 return explicitly an object, then it will return the newly created object,
 otherwise the object that is returned from the called function.
 
