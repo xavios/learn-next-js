@@ -7,15 +7,16 @@
     "node": ">=20.13.1"
   },
   "scripts": {
-    "postinstall": "concurrently -p \"[{index}] - [{pid}]\" \"yarn run install-react-refresher\" \"yarn run install-food-lovers\" \"yarn run install-routing-news\"",
+    "postinstall": "concurrently -p \"[{index}] - [{pid}]\" \"yarn install-react-refresher\" \"yarn install-food-lovers\" \"yarn install-routing-news\"",
     "help": "yarn run",
     "install-react-refresher": "concurrently \"cd ./dummy-backend && yarn install\" \"cd ./react-refresher-course && yarn install\" ",
     "dev-react-refresher": "concurrently \"cd ./dummy-backend && yarn start\" \"cd ./react-refresher-course && yarn start\" ",
     "install-food-lovers": "cd ./food-lovers-next-js && yarn install",
-    "dev-food-lovers": "cd ./food-lovers-next-js && yarn run dev",
-    "prod-food-lovers": "cd ./food-lovers-next-js && yarn run build && yarn run start",
+    "dev-food-lovers": "cd ./food-lovers-next-js && yarn dev",
+    "prod-food-lovers": "cd ./food-lovers-next-js && yarn build && yarn start",
     "install-routing-news": "cd ./routing-news && yarn install",
-    "dev-routing-news": "cd ./routing-news && yarn run dev"
+    "dev-routing-news": "cd ./routing-news && yarn dev",
+    "test-routing-news": "cd ./routing-news && yarn test"
   },
   "repository": {
     "type": "git",
