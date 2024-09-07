@@ -416,6 +416,10 @@ You can create them like this:
 Then the `layout.tsx` will receive `{children, archive, latest}` props, so it can
 render the parallel routes. All of the pages will be reachable under `/archive`.
 
+If we are navigating under the parallel routes, and one of the parallel route is
+not defined, the it will lead to a 404. We need to make sure to add a `default.tsx`
+to the parallel routes.
+
 ---
 
 # Javascript internals

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getAvailableYears } from "./time-helper";
+import { getAvailableYears, getNewsOfYear, getLatestNews } from "./time-helper";
 import { News } from "@/lib/news";
 
 const testNews: News[] = [
@@ -62,6 +62,35 @@ describe("time-helper", () => {
       expect(getAvailableYears([...testNews, ...testNews])).toStrictEqual([
         1557, 1997, 2001, 2024,
       ]);
+    });
+  });
+  describe("getNewsOfYear", () => {
+    it("can be called", () => {
+      getNewsOfYear([], 0);
+    });
+    it("gets a news for a year", () => {
+      expect(getNewsOfYear(testNews, 2001)).toStrictEqual([testNews[2]]);
+    });
+    it("gets multiple news for the year", () => {
+      expect(getNewsOfYear([...testNews, ...testNews], 1557)).toStrictEqual([
+        testNews[3],
+        testNews[3],
+      ]);
+    });
+  });
+  describe("getLAtestNews", () => {
+    it("can be called", () => {
+      getLatestNews([]);
+    });
+    it("gets back the 3 top latest news", () => {
+      const latest = getLatestNews(testNews);
+      expect(latest).toHaveLength(3);
+      expect(latest).toStrictEqual([testNews[0], testNews[2], testNews[1]]);
+    });
+    it("gets back the 2 top latest news, if input is shorted", () => {
+      const latest = getLatestNews(testNews.slice(0, 2));
+      expect(latest).toHaveLength(2);
+      expect(latest).toStrictEqual([testNews[0], testNews[1]]);
     });
   });
 });

@@ -16,7 +16,8 @@
     "prod-food-lovers": "cd ./food-lovers-next-js && yarn build && yarn start",
     "install-routing-news": "cd ./routing-news && yarn install",
     "dev-routing-news": "cd ./routing-news && yarn dev",
-    "test-routing-news": "cd ./routing-news && yarn test"
+    "test-routing-news": "cd ./routing-news && yarn test",
+    "coverage-routing-news": "cd ./routing-news && yarn coverage"
   },
   "repository": {
     "type": "git",
