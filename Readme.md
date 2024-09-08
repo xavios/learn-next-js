@@ -420,6 +420,13 @@ If we are navigating under the parallel routes, and one of the parallel route is
 not defined, the it will lead to a 404. We need to make sure to add a `default.tsx`
 to the parallel routes.
 
+### Catch-all routes
+
+Use the folder name notation of `[[...filter]]` to create catch all routes.
+
+Then inside the page component you will get an array in the `param.filter` with
+the parts of the path. I.e: /2024/1 --> `["2024","1"]`.
+
 ---
 
 # Javascript internals

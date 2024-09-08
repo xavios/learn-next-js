@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { getAvailableYears, getNewsOfYear, getLatestNews } from "./time-helper";
+import {
+  getAvailableYears,
+  getNewsOfYear,
+  getLatestNews,
+  getAvailableMonths,
+  getNewsOfYearAndMonth,
+} from "./time-helper";
 import { News } from "@/lib/news";
 
 const testNews: News[] = [
@@ -91,6 +97,44 @@ describe("time-helper", () => {
       const latest = getLatestNews(testNews.slice(0, 2));
       expect(latest).toHaveLength(2);
       expect(latest).toStrictEqual([testNews[0], testNews[1]]);
+    });
+  });
+  describe("getAvailableMonths", () => {
+    it("can be called", () => {
+      getAvailableMonths(testNews, 2022);
+    });
+    it("returns the month for a given year", () => {
+      expect(getAvailableMonths(testNews, 2024)).toStrictEqual([0]);
+    });
+    it("returns the months for a given year", () => {
+      const additionalMonths = [...testNews];
+      for (let idx in testNews) {
+        additionalMonths[idx] = { ...testNews[idx] };
+      }
+      additionalMonths[3].time = new Date(2024, 3, 1);
+      additionalMonths[2].time = new Date(2024, 7, 1);
+      additionalMonths[1].time = new Date(2024, 5, 1);
+      expect(
+        getAvailableMonths([...testNews, ...additionalMonths], 2024)
+      ).toStrictEqual([0, 3, 5, 7]);
+    });
+    it("returns empty array for a not found year year", () => {
+      expect(getAvailableMonths([...testNews], 1999)).toStrictEqual([]);
+    });
+  });
+  describe("getNewsOfYearAndMonth", () => {
+    it("can be called", () => {
+      getNewsOfYearAndMonth(testNews, 2024, 0);
+    });
+    it("returns one news for a year and a month", () => {
+      expect(getNewsOfYearAndMonth(testNews, 2024, 0)).toStrictEqual([
+        testNews[0],
+      ]);
+    });
+    it("returns multiple news for a year and a month", () => {
+      expect(
+        getNewsOfYearAndMonth([...testNews, testNews[0]], 2024, 0)
+      ).toStrictEqual([testNews[0], testNews[0]]);
     });
   });
 });
