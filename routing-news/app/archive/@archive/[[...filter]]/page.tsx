@@ -25,9 +25,12 @@ const monthNames = [
 ];
 
 const NewsOfYear = ({ params }: { params: { filter: string[] } }) => {
-  const selectedYear = params.filter ? params.filter[0] : undefined;
+  const selectedYear =
+    params.filter && params.filter.length > 0 ? params.filter[0] : undefined;
   const selectedMonth =
     params.filter && params.filter.length > 1 ? params.filter[1] : undefined;
+
+  validateFilters(selectedYear, selectedMonth, params.filter);
 
   let headerMenu: React.ReactNode = <></>;
   let news: React.ReactNode = <p>No news found for the selected period.</p>;
@@ -56,6 +59,11 @@ const NewsOfYear = ({ params }: { params: { filter: string[] } }) => {
   }
 
   if (selectedYear && selectedMonth) {
+    headerMenu = (
+      <p>
+        <Link href="/archive">Back to the archive...</Link>
+      </p>
+    );
     news = getNewsOfYearAndMonth(
       LatestNews,
       parseInt(selectedYear),
@@ -76,3 +84,31 @@ const NewsOfYear = ({ params }: { params: { filter: string[] } }) => {
 };
 
 export default NewsOfYear;
+
+function validateFilters(
+  selectedYear: string | undefined,
+  selectedMonth: string | undefined,
+  filters: string[]
+) {
+  const invalidFilterParamsErr = new Error(
+    "Problem with the url filter segments."
+  );
+  const availableYears = getAvailableYears(LatestNews);
+  if (selectedYear && !availableYears.includes(parseInt(selectedYear))) {
+    throw invalidFilterParamsErr;
+  }
+
+  if (selectedYear && selectedMonth) {
+    const availableMonths = getAvailableMonths(
+      LatestNews,
+      parseInt(selectedYear)
+    );
+    if (!availableMonths.includes(parseInt(selectedMonth))) {
+      throw invalidFilterParamsErr;
+    }
+  }
+
+  if (filters && filters.length > 2) {
+    throw invalidFilterParamsErr;
+  }
+}
