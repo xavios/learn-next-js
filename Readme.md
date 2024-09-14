@@ -429,6 +429,12 @@ the parts of the path. I.e: /2024/1 --> `["2024","1"]`.
 
 ---
 
+`usePathname()` from is a `"next/navigation"` client component hook, that lets
+you to get the current path name. I used it in the Routing News app to make sure
+that the currently active header menu item is highlighted.
+
+---
+
 # Javascript internals
 
 ## Single threaded
